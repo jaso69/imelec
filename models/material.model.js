@@ -1,15 +1,12 @@
 const {Schema, model} = require('mongoose');
-const proovedorModel = require('./proovedor.model');
-const { json } = require('express');
 
 const MaterialSchema = Schema ({
-    code:           {type: String,},
-    description:    {type: String},
-    price_net:      {type: String,},
-    price_venta:    {type: String,},
-    discount_net:   {type: String,},
-    discount_venta: {type: String,},
-    id_proovedor:   {type: JSON,},
+    codigo:         {type: String,},
+    descripcion:    {type: String},
+    cantidad:       {type: String,},
+    precioCompra:   {type: String,},
+    precioVenta:    {type: String,},
+    proovedor:      {type: JSON,},
     status:         {type: Boolean, default: true },
 })
 

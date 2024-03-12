@@ -13,6 +13,7 @@ class Server {
         this.materialPath = '/api/materials';
         this.budgetPath = '/api/budgets';
         this.presupuestoPath = '/api/presupuestos';
+        this.rpgPath = '/api/gpt'
         this.mongoDb();
         this.middlewares()
         this.routes();
@@ -35,6 +36,7 @@ class Server {
        this.app.use(this.materialPath, require('../routes/material.routes'));
        this.app.use(this.budgetPath, require('../routes/budget.routes'));
        this.app.use(this.presupuestoPath, require('../routes/presupuesto.routes'));
+       this.app.use(this.rpgPath, require('../routes/gpt.routes'))
     }
 
     start() {

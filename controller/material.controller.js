@@ -28,39 +28,42 @@ const materialGetId =  async (req = request, res = response) => {
 
 
 const materialPost = async(req = request, res = response) => {
-    const { code = '', 
-            id_proovedor = {},
-            description = '',
-            price_net = '',
-            price_venta = '',
-            discount_net = '',
-            discount_venta = '',
+    const { 
+            proovedor = {},
+            codigo = '',
+            descripcion = '',
+            cantidad = '',
+            precioCompra = '',
+            precioVenta = '',
             status = true,
         } = req.body;
 
     const material = new Material({
-        code, 
-        description,
-        price_net,
-        price_venta,
-        discount_net,
-        discount_venta,
-        id_proovedor,
+        proovedor, 
+        codigo,
+        descripcion,
+        cantidad,
+        precioCompra,
+        precioVenta,
         status,
     });
     try {
         await material.save();
+        res.status(200).json({msg: 'success'});
     } catch (error) {
+        res.status(500).json({
+            'msg': 'Error al guardar el material',
+            error
+          })
         console.log(error);
     }
-    res.json(material)
 }
 
 const materialPatch = async (req = request, res = response) => {
     const id = req.params.id;
     try {
-        const material = await Material.findByIdAndUpdate(id, req.body, {new: true});
-        res.json(material);
+        await Material.findByIdAndUpdate(id, req.body, {new: true});
+        res.status(200).json({msg: 'success'});
     } catch (error) {
         console.log(error);
     }
@@ -73,7 +76,7 @@ const materialDelete = async (req = request, res = response) => {
         const material = await Material.findById(id);
         material.status = false;
         await material.save();
-        res.json(material);
+        res.status(200).json({msg: 'success'});
     } catch (error) {
         console.log(error);
     }

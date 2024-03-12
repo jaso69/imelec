@@ -84,8 +84,8 @@ const proovedorPost = async(req = request, res = response) => {
 const proovedorPatch = async (req = request, res = response) => {
     const id = req.params.id;
     try {
-        const proovedor = await Proovedor.findByIdAndUpdate(id, req.body, {new: true});
-        res.json(proovedor);
+        await Proovedor.findByIdAndUpdate(id, req.body, {new: true});
+        res.status(200).json({msg: 'success'});
     } catch (error) {
         console.log(error);
     }
@@ -93,12 +93,11 @@ const proovedorPatch = async (req = request, res = response) => {
 
 const proovedorDelete = async (req = request, res = response) => {
     const id = req.params.id;
-    console.log(id);
     try {
         const proovedor = await Proovedor.findById(id);
         proovedor.status = false;
         await proovedor.save();
-        res.json(proovedor);
+        res.status(200).json({msg: 'success'});
     } catch (error) {
         console.log(error);
     }
